@@ -1,0 +1,66 @@
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+class Solution{
+    public:
+    // arr: input array
+    // n: size of array
+    //Function to find the sum of contiguous subarray with maximum sum.
+    int maxSubarraySum(int arr[], int n)
+    {
+        
+        // Your code here
+         int tot =0;
+         int msf = INT_MIN; 
+                
+        int l =0;
+        int r = 0;
+        for(int i = 0; i< n; i++)
+        {
+           tot+= arr[i]; 
+           
+           if(tot< arr[i])// this variation make sure , it will work for  -1, -2, -3  all negative values array
+           {
+               tot = arr[i]; 
+               l = i;
+              
+           }
+           
+           if(msf < tot)
+           {
+               msf = tot;
+                r = i;
+           }
+         }
+         
+         std::cout << l<< " " <<r;
+        return msf;
+    }
+};
+
+// { Driver Code Starts.
+
+int main()
+{
+    int t,n;
+    
+    cin>>t; //input testcases
+    while(t--) //while testcases exist
+    {
+        
+        cin>>n; //input size of array
+        
+        int a[n];
+        
+        for(int i=0;i<n;i++)
+            cin>>a[i]; //inputting elements of array
+            
+        Solution ob;
+        
+        cout << ob.maxSubarraySum(a, n) << endl;
+    }
+}
+  // } Driver Code Ends
