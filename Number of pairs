@@ -1,0 +1,82 @@
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+ 
+
+class Solution{
+    public:
+    
+    // X[], Y[]: input arrau
+    // M, N: size of arrays X[] and Y[] respectively
+    //Function to count number of pairs such that x^y is greater than y^x.
+    
+     long long AddValidPair(int x,int Y[], int N, int NOfY[])
+     {
+         long long ans =0;
+         
+         if(x==0)return ans;
+         if(x<=1)   return NOfY[0];
+       
+         int count =0;
+        // if(x>=5)
+         {int* Uid = upper_bound(Y, Y+N, x);
+          count = Y+N-Uid;
+         }
+         
+        //for x = 2 and ( y =0, 1)
+        ans += NOfY[0] +NOfY[1];
+        
+           if(x==2)//remove 2,3 and 2 4 duplicate 
+        ans -= (NOfY[3] +NOfY[4]);
+        
+        if(x==3)
+        ans += NOfY[2];
+         
+         return ans += count;
+         
+     }
+    long long countPairs(int X[], int Y[], int M, int N)
+    {
+       //Your code here
+       std::sort(Y, Y+N);
+       int NOfY[5]={0};
+        for(int c =0;c<N;c++)
+        {
+            if(Y[c]<5)  NOfY[Y[c]]++;
+        }
+       
+       long long ans =0;
+       for(int i =0;i<M;i++)
+       ans += AddValidPair(X[i],Y, N, NOfY);
+       
+       return ans;
+       
+    }
+};
+
+
+// { Driver Code Starts.
+int main()
+{
+	int T;
+	cin>>T;
+	while(T--)
+	{
+		int M,N;
+		cin>>M>>N;
+		int i,a[M],b[N];
+		for(i=0;i<M;i++)
+		{
+			cin>>a[i];
+		}
+		for(i=0;i<N;i++)
+		{
+			cin>>b[i];
+		}
+		Solution ob;
+		cout<<ob.countPairs(a, b, M, N)<<endl;
+	}
+}  // } Driver Code Ends
