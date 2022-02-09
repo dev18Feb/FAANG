@@ -1,0 +1,27 @@
+													
+											l 	h	mid
+		0	1	2	3						0	3	1
+	0	0	0	0	0			   [3, 2, 1],					
+	1	0	3	5	6			    [2, 0, 7],					
+	2	0	5	7	15			    [1, 1, 9]					
+	3	0	6	9	26								
+													
+													
+													
+													
+													
+	 bool check(vector<vector<int>> &dp, int threshold ,int assumelength){												
+	        //Her check that assumelength square length matrix have sum how much should be less than equal to threshold												
+	        												
+	        int minsum=INT_MAX;												
+	        												
+	        for(int i=0;i<dp.size();i++){												
+	            for(int j=0;j<dp[i].size();j++){												
+	                if(i - assumelength>=0 and j - assumelength>=0){												
+	                  minsum=dp[i][j]- dp[i - assumelength][j] - dp[i][j -assumelength] + dp[i - assumelength][j - assumelength];												
+	                    if(minsum<= threshold) return true;												
+	                }												
+	            }												
+	        }												
+	        return false;												
+	    }												
